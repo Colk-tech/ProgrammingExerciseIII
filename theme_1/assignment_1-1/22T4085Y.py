@@ -25,7 +25,6 @@
 # View は Game に依存してはならない。
 # Controller は Game と View に依存する。
 
-import tkinter as tk
 from dataclasses import dataclass, field
 
 
@@ -63,6 +62,10 @@ class Config:
 
 
 class TkinterView:
+    pass
+
+
+class Controller:
     pass
 
 
