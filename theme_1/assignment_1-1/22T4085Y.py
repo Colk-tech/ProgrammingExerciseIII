@@ -24,6 +24,9 @@
 # Game は他のクラスに依存してはならない。
 # View は Game に依存してはならない。
 # Controller は Game と View に依存する。
+#
+# このとうな設計にすることで、各クラスの責務を明確にし、依存するライブラリを変更する際にも、
+# 影響範囲を最小限に抑えることができる。
 
 from dataclasses import dataclass, field
 
