@@ -56,5 +56,10 @@ class Models:
             self.validate_all()
 
 
+# ゲームの設定を定義する。
+class Config:
+    pass
+
+
 if __name__ == "__main__":
     pass
