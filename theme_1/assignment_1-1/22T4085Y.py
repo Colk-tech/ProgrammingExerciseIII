@@ -39,6 +39,8 @@ class Models:
     # ただし、バリデーションは行う。
     @dataclass(frozen=True)
     class Question:
+        # データクラスのフィールドを定義する。
+        # データクラスのフィールドは、デフォルト値を持てる。
         question: str = field(default_factory=str)
         wrong_answers: list[str] = field(default_factory=list)
         correct_answers: list[str] = field(default_factory=list)
