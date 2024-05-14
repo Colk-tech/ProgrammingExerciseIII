@@ -25,9 +25,11 @@
 # View は Game に依存してはならない。
 # Controller は Game と View に依存する。
 #
-# このとうな設計にすることで、各クラスの責務を明確にし、依存するライブラリを変更する際にも、
-# 影響範囲を最小限に抑えることができる。
+# このとうな設計にすることで、各クラスの責務を明確にし、それぞれのクラスを独立してテストできるようにする。
+# また、ViewAbstract クラスを定義し、TkinterView クラスがそれを継承することで、それを実装する。
+# これにより、View が他のライブラリに依存しないようにする。
 
+from abc import ABC
 from dataclasses import dataclass, field
 
 
@@ -64,7 +66,7 @@ class Config:
     pass
 
 
-class TkinterView:
+class ViewAbstract(ABC):
     pass
 
 
