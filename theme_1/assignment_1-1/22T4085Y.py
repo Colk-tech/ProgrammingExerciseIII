@@ -28,6 +28,7 @@
 from dataclasses import dataclass, field
 
 
+# ゲームに用いるデータ構造を定義する。
 class Models:
     # dataclass はデータクラスを定義するためのデコレータである。
     # データクラスは、データを保持するためのクラスであり、データの保持と操作を行うためのメソッドを持たない。
