@@ -43,6 +43,7 @@ class Models:
         question: str = field(default_factory=str)
         wrong_answers: list[str] = field(default_factory=list)
         correct_answers: list[str] = field(default_factory=list)
+        score: int = field(default=0)
 
         # バリデーションを行うメソッドを定義する。
         def validate_all(self):
