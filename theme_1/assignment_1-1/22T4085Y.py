@@ -26,6 +26,7 @@
 # Controller は Game と View に依存する。
 
 from dataclasses import dataclass, field
+import tkinter as tk
 
 
 # ゲームに用いるデータ構造を定義する。
