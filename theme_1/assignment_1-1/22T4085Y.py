@@ -29,7 +29,6 @@
 # また、ViewAbstract クラスを定義し、TkinterView クラスがそれを継承することで、それを実装する。
 # これにより、View が他のライブラリに依存しないようにする。
 
-from abc import ABC
 from dataclasses import dataclass, field
 
 
@@ -56,6 +55,9 @@ class Models:
             if not self.correct_answers:
                 raise ValueError("Correct answers must not be empty.")
 
+            if not self.score >= 0:
+                raise ValueError("Score must be greater than or equal to 0.")
+
         # __post_init__ は dataclass によって提供される特殊なメソッドである。
         # このメソッドは、インスタンスが生成された後に自動で呼び出される。
         def __post_init__(self):
@@ -64,10 +66,6 @@ class Models:
 
 # ゲームの設定を定義する。
 class Config:
-    pass
-
-
-class ViewAbstract(ABC):
     pass
 
 
