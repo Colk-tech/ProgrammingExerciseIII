@@ -31,7 +31,6 @@
 # pubsub パターンは、Publisher-Subscriber パターンの略であり、
 # Publisher はイベントを発行し、Subscriber はそのイベントを受け取る。
 # これにより、View と Controller は疎結合になり、View と Controller はそれぞれ独立してテストできるようになる。
-#
 
 import tkinter as tk
 from dataclasses import dataclass, field
