@@ -34,12 +34,22 @@ from dataclasses import dataclass, field
 # データクラスは、データを保持するためのクラスであり、データの保持と操作を行うためのメソッドを持たない。
 # ただし、バリデーションは行う。
 @dataclass(frozen=True)
+class Answer:
+    answer: str = field(default_factory=str)
+    is_correct: bool = field(default=False)
+
+    def validate_all(self):
+        if not self.answer:
+            raise ValueError("Answer must not be empty.")
+
+    def __post_init__(self):
+        self.validate_all()
+
+
+@dataclass(frozen=True)
 class Question:
-    # データクラスのフィールドを定義する。
-    # データクラスのフィールドは、デフォルト値を持てる。
     question: str = field(default_factory=str)
-    wrong_answers: list[str] = field(default_factory=list)
-    correct_answers: list[str] = field(default_factory=list)
+    answers: list[Answer] = field(default_factory=list)
     score: int = field(default=0)
 
     # バリデーションを行うメソッドを定義する。
@@ -47,11 +57,8 @@ class Question:
         if not self.question:
             raise ValueError("Question must not be empty.")
 
-        if not self.wrong_answers:
-            raise ValueError("Wrong answers must not be empty.")
-
-        if not self.correct_answers:
-            raise ValueError("Correct answers must not be empty.")
+        if not self.answers:
+            raise ValueError("Answers must not be empty.")
 
         if not self.score >= 0:
             raise ValueError("Score must be greater than or equal to 0.")
