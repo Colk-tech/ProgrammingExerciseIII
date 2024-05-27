@@ -27,6 +27,7 @@
 #
 # このとうな設計にすることで、各クラスの責務を明確にし、それぞれのクラスを独立してテストできるようにする。
 
+import tkinter as tk
 from dataclasses import dataclass, field
 
 
