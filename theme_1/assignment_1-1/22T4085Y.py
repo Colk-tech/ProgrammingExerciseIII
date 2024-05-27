@@ -17,7 +17,7 @@
 #
 # また、このプログラムは MVC パターンに類似の設計を採用している。
 # クラスの構成は以下の通りである。
-# - Models: ゲームに用いるデータ構造を定義するクラス。
+# - ( Models: ゲームに用いるデータ構造を定義するクラス。 )
 # - View: ゲームの表示を定義するクラス。
 # - Controller: ゲームの制御を行うクラス。
 #
@@ -30,38 +30,36 @@
 from dataclasses import dataclass, field
 
 
-# ゲームに用いるデータ構造を定義する。
-class Models:
-    # dataclass はデータクラスを定義するためのデコレータである。
-    # データクラスは、データを保持するためのクラスであり、データの保持と操作を行うためのメソッドを持たない。
-    # ただし、バリデーションは行う。
-    @dataclass(frozen=True)
-    class Question:
-        # データクラスのフィールドを定義する。
-        # データクラスのフィールドは、デフォルト値を持てる。
-        question: str = field(default_factory=str)
-        wrong_answers: list[str] = field(default_factory=list)
-        correct_answers: list[str] = field(default_factory=list)
-        score: int = field(default=0)
+# dataclass はデータクラスを定義するためのデコレータである。
+# データクラスは、データを保持するためのクラスであり、データの保持と操作を行うためのメソッドを持たない。
+# ただし、バリデーションは行う。
+@dataclass(frozen=True)
+class Question:
+    # データクラスのフィールドを定義する。
+    # データクラスのフィールドは、デフォルト値を持てる。
+    question: str = field(default_factory=str)
+    wrong_answers: list[str] = field(default_factory=list)
+    correct_answers: list[str] = field(default_factory=list)
+    score: int = field(default=0)
 
-        # バリデーションを行うメソッドを定義する。
-        def validate_all(self):
-            if not self.question:
-                raise ValueError("Question must not be empty.")
+    # バリデーションを行うメソッドを定義する。
+    def validate_all(self):
+        if not self.question:
+            raise ValueError("Question must not be empty.")
 
-            if not self.wrong_answers:
-                raise ValueError("Wrong answers must not be empty.")
+        if not self.wrong_answers:
+            raise ValueError("Wrong answers must not be empty.")
 
-            if not self.correct_answers:
-                raise ValueError("Correct answers must not be empty.")
+        if not self.correct_answers:
+            raise ValueError("Correct answers must not be empty.")
 
-            if not self.score >= 0:
-                raise ValueError("Score must be greater than or equal to 0.")
+        if not self.score >= 0:
+            raise ValueError("Score must be greater than or equal to 0.")
 
-        # __post_init__ は dataclass によって提供される特殊なメソッドである。
-        # このメソッドは、インスタンスが生成された後に自動で呼び出される。
-        def __post_init__(self):
-            self.validate_all()
+    # __post_init__ は dataclass によって提供される特殊なメソッドである。
+    # このメソッドは、インスタンスが生成された後に自動で呼び出される。
+    def __post_init__(self):
+        self.validate_all()
 
 
 # ゲームの設定を定義する。
