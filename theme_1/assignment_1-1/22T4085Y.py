@@ -70,6 +70,68 @@ class Question:
         self.validate_all()
 
 
+# ゲームの表示を定義する。
+# ゲームの表示は、ウィンドウの表示、ボタンの表示、ラベルの表示などを行う。
+class View:
+    WINDOW_SIZE_XY = (550, 350)
+    WINDOW_SIZE_XY_STR = f"{WINDOW_SIZE_XY[0]}x{WINDOW_SIZE_XY[1]}"
+
+    WINDOW_CENTER_X = WINDOW_SIZE_XY[0] // 2
+    WINDOW_CENTER_Y = WINDOW_SIZE_XY[1] // 2
+
+    WINDOW_TITLE = "Quiz Game"
+
+    class Frames:
+        class FrameBase:
+            def __init__(self):
+                self.__frame = tk.Frame()
+                self.__frame.grid(row=0, column=0, sticky="nsew")
+
+                self.__frame.grid_rowconfigure(0, weight=1)
+                self.__frame.grid_rowconfigure(1, weight=1)
+                self.__frame.grid_columnconfigure(0, weight=1)
+
+            @property
+            def frame(self):
+                return self.__frame
+
+        class TitleFrame(FrameBase):
+            def __init__(self):
+                super().__init__()
+
+                self.__setup_design()
+
+            def __setup_design(self):
+                self.__title_label = tk.Label(
+                    self.frame,
+                    text="Quiz Game",
+                    font=(None, '64')
+                )
+                self.__title_label.grid(row=0, column=0, padx=10, pady=10)
+
+                self.__start_button = tk.Button(
+                    self.frame,
+                    text="Start",
+                    width=10,
+                    height=2,
+                )
+                self.__start_button.grid(row=1, column=0, padx=10, pady=10)
+
+    def __init__(self):
+        self.__root: tk.Tk = tk.Tk()
+
+        self.__root.title(self.WINDOW_TITLE)
+        self.__root.geometry(self.WINDOW_SIZE_XY_STR)
+
+        self.__root.grid_rowconfigure(0, weight=1)
+        self.__root.grid_columnconfigure(0, weight=1)
+
+    def run(self):
+        self.__root.tkraise(self.Frames.TitleFrame().frame)
+
+        self.__root.mainloop()
+
+
 # ゲームの設定を定義する。
 class Config:
     pass
