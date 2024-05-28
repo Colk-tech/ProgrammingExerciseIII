@@ -44,10 +44,13 @@ class Answer:
     answer: str = field(default_factory=str)
     is_correct: bool = field(default=False)
 
+    # バリデーションを行うメソッドを定義する。
     def validate_all(self):
         if not self.answer:
             raise ValueError("Answer must not be empty.")
 
+    # __post_init__ は dataclass によって提供される特殊なメソッドである。
+    # このメソッドは、インスタンスが生成された後に自動で呼び出される。
     def __post_init__(self):
         self.validate_all()
 
@@ -58,7 +61,6 @@ class Question:
     answers: list[Answer] = field(default_factory=list)
     score: int = field(default=0)
 
-    # バリデーションを行うメソッドを定義する。
     def validate_all(self):
         if not self.question:
             raise ValueError("Question must not be empty.")
@@ -69,8 +71,6 @@ class Question:
         if not self.score >= 0:
             raise ValueError("Score must be greater than or equal to 0.")
 
-    # __post_init__ は dataclass によって提供される特殊なメソッドである。
-    # このメソッドは、インスタンスが生成された後に自動で呼び出される。
     def __post_init__(self):
         self.validate_all()
 
