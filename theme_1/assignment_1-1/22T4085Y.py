@@ -41,12 +41,12 @@ from dataclasses import dataclass, field
 # ただし、バリデーションは行う。
 @dataclass(frozen=True)
 class Solution:
-    answer: str = field(default_factory=str)
+    text: str = field(default_factory=str)
     is_correct: bool = field(default=False)
 
     # バリデーションを行うメソッドを定義する。
     def validate_all(self):
-        if not self.answer:
+        if not self.text:
             raise ValueError("Answer must not be empty.")
 
     # __post_init__ は dataclass によって提供される特殊なメソッドである。
