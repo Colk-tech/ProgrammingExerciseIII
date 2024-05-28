@@ -40,7 +40,7 @@ from dataclasses import dataclass, field
 # データクラスは、データを保持するためのクラスであり、データの保持と操作を行うためのメソッドを持たない。
 # ただし、バリデーションは行う。
 @dataclass(frozen=True)
-class Answer:
+class Solution:
     answer: str = field(default_factory=str)
     is_correct: bool = field(default=False)
 
@@ -58,14 +58,14 @@ class Answer:
 @dataclass(frozen=True)
 class Question:
     question: str = field(default_factory=str)
-    answers: list[Answer] = field(default_factory=list)
+    solutions: list[Solution] = field(default_factory=list)
     score: int = field(default=0)
 
     def validate_all(self):
         if not self.question:
             raise ValueError("Question must not be empty.")
 
-        if not self.answers:
+        if not self.solutions:
             raise ValueError("Answers must not be empty.")
 
         if not self.score >= 0:
