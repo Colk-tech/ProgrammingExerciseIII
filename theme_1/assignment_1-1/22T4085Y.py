@@ -57,12 +57,12 @@ class Solution:
 
 @dataclass(frozen=True)
 class Question:
-    question: str = field(default_factory=str)
+    text: str = field(default_factory=str)
     solutions: list[Solution] = field(default_factory=list)
     score: int = field(default=0)
 
     def validate_all(self):
-        if not self.question:
+        if not self.text:
             raise ValueError("Question must not be empty.")
 
         if not self.solutions:
