@@ -83,7 +83,7 @@ class Question:
         self.validate_all()
 
 
-@property
+@dataclass(frozen=True)
 class EventData:
     event_type: Literal["start_clicked", "answer"] = field()
     selected_solution: Optional[Solution] = field(default=None)
@@ -155,6 +155,7 @@ class View:
                     text="Start",
                     width=10,
                     height=2,
+                    command=lambda: EventBroker().notify(event_data=EventData())
                 )
                 self.__start_button.grid(row=1, column=0, padx=10, pady=10)
 
