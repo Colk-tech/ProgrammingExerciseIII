@@ -202,7 +202,48 @@ class View:
 
 
 class Controller:
-    pass
+    SAMPLE_QUESTIONS: list[Question] = [
+        Question(
+            text="What is 1 + 1?",
+            solutions=[
+                Solution(text="1", is_correct=False),
+                Solution(text="2", is_correct=True),
+                Solution(text="3", is_correct=False),
+                Solution(text="4", is_correct=False),
+            ],
+            score=100
+        ),
+        Question(
+            text="Which is the correct answer for ∫x dx?",
+            solutions=[
+                Solution(text="1/2 x^2 + C", is_correct=True),
+                Solution(text="x^2 + C", is_correct=False),
+                Solution(text="x + C", is_correct=False),
+                Solution(text="1 + C", is_correct=False),
+            ],
+            score=100
+        ),
+        Question(
+            text="What is the capital of France?",
+            solutions=[
+                Solution(text="Paris", is_correct=True),
+                Solution(text="Lyon", is_correct=False),
+                Solution(text="Marseille", is_correct=False),
+                Solution(text="Nice", is_correct=False),
+            ],
+            score=100
+        ),
+        Question(
+            text="Which of the following is a prime number?",
+            solutions=[
+                Solution(text="13", is_correct=True),
+                Solution(text="21", is_correct=False),
+                Solution(text="57", is_correct=False),
+                Solution(text="169", is_correct=False),
+            ],
+            score=100
+        ),
+    ]
 
 
 if __name__ == "__main__":
