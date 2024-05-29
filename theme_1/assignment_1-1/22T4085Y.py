@@ -87,6 +87,18 @@ class EventData:
         self.validate_all()
 
 
+class EventBroker:
+    def __init__(self):
+        self.__listeners: list[Callable[[EventData], Any]] = []
+
+    def add_listener(self, listener: Callable[[EventData], Any]):
+        self.__listeners.append(listener)
+
+    def notify(self, event_data: EventData):
+        for listener in self.__listeners:
+            listener(event_data)
+
+
 # ゲームの表示を定義する。
 # ゲームの表示は、ウィンドウの表示、ボタンの表示、ラベルの表示などを行う。
 class View:
