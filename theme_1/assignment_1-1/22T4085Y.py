@@ -29,6 +29,7 @@
 
 import tkinter as tk
 from dataclasses import dataclass, field
+from typing import Callable, Any, Literal, Optional
 
 
 # dataclass はデータクラスを定義するためのデコレータである。
@@ -65,6 +66,22 @@ class Question:
 
         if not self.score >= 0:
             raise ValueError("Score must be greater than or equal to 0.")
+
+    def __post_init__(self):
+        self.validate_all()
+
+
+@property
+class EventData:
+    event_type: Literal["start", "answer"] = field()
+    selected_solution: Optional[Solution] = field(default=None)
+
+    def validate_all(self):
+        if not self.event_type:
+            raise ValueError("Event type must not be empty.")
+
+        if self.event_type == "answer" and not self.selected_solution:
+            raise ValueError("Selected solution must not be empty.")
 
     def __post_init__(self):
         self.validate_all()
