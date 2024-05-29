@@ -201,11 +201,6 @@ class View:
         self.__root.mainloop()
 
 
-# ゲームの設定を定義する。
-class Config:
-    pass
-
-
 class Controller:
     pass
 
