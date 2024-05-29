@@ -37,9 +37,12 @@ from typing import Callable, Any, Literal, Optional
 # このパターンは、インスタンスが 1 つしか存在しないことを保証するため、インスタンスを共有することができる。
 # 事実上のなグローバル変数として利用することができる。
 class Singleton(object):
+    _instance = None
+
     def __new__(cls, *args, **kwargs):
-        if not hasattr(cls, "_instance"):
+        if cls._instance is None:
             cls._instance = super(Singleton, cls).__new__(cls)
+            cls._instance._initialized = False  # 初期化フラグを追加
 
         return cls._instance
 
@@ -99,9 +102,12 @@ class EventData:
         self.validate_all()
 
 
-class EventBroker:
+class EventBroker(Singleton):
     def __init__(self):
-        self.__listeners: list[Callable[[EventData], Any]] = []
+        # 初期化が完了していない場合のみ初期化処理を行う。
+        if not self._initialized:
+            self.__listeners: list[Callable[[EventData], Any]] = []
+            self._initialized = True
 
     def add_listener(self, listener: Callable[[EventData], Any]):
         self.__listeners.append(listener)
