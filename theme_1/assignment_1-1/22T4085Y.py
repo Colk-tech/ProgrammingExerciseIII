@@ -73,7 +73,7 @@ class Question:
 
 @property
 class EventData:
-    event_type: Literal["start", "answer"] = field()
+    event_type: Literal["start_clicked", "answer"] = field()
     selected_solution: Optional[Solution] = field(default=None)
 
     def validate_all(self):
