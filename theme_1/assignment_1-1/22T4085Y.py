@@ -34,8 +34,8 @@ from typing import Callable, Any, Literal, Optional
 
 # デザインパターン Singleton を実装する。
 # Singleton パターンは、クラスのインスタンスが 1 つしか存在しないことを保証するパターンである。
-# このパターンは、インスタンスが 1 つしか存在しないことを保証するため、インスタンスを共有することができる。
-# 事実上のなグローバル変数として利用することができる。
+# このパターンは、インスタンスが 1 つしか存在しないことを保証するため、インスタンスを共有できる。
+# 事実上のなグローバル変数として利用できる。
 class Singleton(object):
     _instance = None
 
@@ -161,7 +161,7 @@ class View:
                     text="Start",
                     width=10,
                     height=2,
-                    command=lambda: EventBroker().notify(event_data=EventData())
+                    command=lambda: EventBroker().notify(event_data=EventData(event_type="start_clicked"))
                 )
                 self.__start_button.grid(row=1, column=0, padx=10, pady=10)
 
@@ -219,6 +219,9 @@ class View:
 
         self.__root.mainloop()
 
+    def show_question(self, question: Question):
+        self.__root.tkraise(self.Frames.QuestionFrame(question).frame)
+
 
 class Controller:
     SAMPLE_QUESTIONS: list[Question] = [
@@ -264,6 +267,29 @@ class Controller:
         ),
     ]
 
+    def __init__(self):
+        EventBroker().add_listener(self.__on_event)
+
+        self.__view: View = View()
+        self.__view.run()
+
+    def __on_event(self, event_data: EventData):
+        if event_data.event_type == "start_clicked":
+            print("Start clicked.")
+            self.__on_start_clicked()
+
+        elif event_data.event_type == "answer":
+            self.__on_answer(event_data.selected_solution)
+
+    def __on_start_clicked(self):
+        self.__view.show_question(self.SAMPLE_QUESTIONS[0])
+
+    def __on_answer(self, selected_solution: Solution):
+        pass
+
+    def run(self):
+        pass
+
 
 if __name__ == "__main__":
-    View().run()
+    Controller().run()
