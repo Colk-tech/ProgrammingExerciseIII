@@ -32,6 +32,18 @@ from dataclasses import dataclass, field
 from typing import Callable, Any, Literal, Optional
 
 
+# デザインパターン Singleton を実装する。
+# Singleton パターンは、クラスのインスタンスが 1 つしか存在しないことを保証するパターンである。
+# このパターンは、インスタンスが 1 つしか存在しないことを保証するため、インスタンスを共有することができる。
+# 事実上のなグローバル変数として利用することができる。
+class Singleton(object):
+    def __new__(cls, *args, **kwargs):
+        if not hasattr(cls, "_instance"):
+            cls._instance = super(Singleton, cls).__new__(cls)
+
+        return cls._instance
+
+
 # dataclass はデータクラスを定義するためのデコレータである。
 # データクラスは、データを保持するためのクラスであり、データの保持と操作を行うためのメソッドを持たない。
 # ただし、バリデーションは行う。
