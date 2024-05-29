@@ -117,6 +117,46 @@ class View:
                 )
                 self.__start_button.grid(row=1, column=0, padx=10, pady=10)
 
+        class QuestionFrame(FrameBase):
+            def __init__(self, question: Question):
+                super().__init__()
+
+                self.__question: Question = question
+
+                self.__setup_design()
+
+            def __setup_design(self):
+                self.__question_label = tk.Label(
+                    self.frame,
+                    text=self.__question.text,
+                    font=(None, '32')
+                )
+                self.__question_label.grid(
+                    row=0,
+                    column=0,
+                    pady=10,
+                )
+
+                self.__answer_buttons: list[tk.Button] = []
+                for i, solution in enumerate(self.__question.solutions):
+                    button = tk.Button(
+                        self.frame,
+                        text=i,
+                        width=10,
+                        height=2,
+                    )
+
+                    solution_text_label = tk.Label(
+                        self.frame,
+                        text=solution.text,
+                        font=(None, '24')
+                    )
+
+                    button.grid(row=i + 1, column=0, padx=100, pady=10)
+                    solution_text_label.grid(row=i + 1, column=1, padx=10, pady=10)
+
+                    self.__answer_buttons.append(button)
+
     def __init__(self):
         self.__root: tk.Tk = tk.Tk()
 
@@ -142,4 +182,4 @@ class Controller:
 
 
 if __name__ == "__main__":
-    pass
+    View().run()
