@@ -23,22 +23,127 @@ THIS PROGRAM IS THE ORIGINAL. DO NOT HAND IN THIS PROGRAM DESPITE IT IS PUBLIC.
 -->
 <html lang="ja">
 <head>
-    <title>DOM とイベント</title>
+    <meta charset="UTF-8">
+    <title>文字数カウンター</title>
+    <!--
+    <style> タグ内に CSS を記述することで、HTML を装飾できる。
+    一般的には、外部ファイルに CSS を記述し、HTML から読み込むことが推奨されているが、
+    今回の課題では単一の HTML ファイルであることを要求されているため、この方法を採用した。
+    なお、CSS については授業資料で指示されていなかったので、詳しい説明は割愛する。
+    -->
+    <style>
+        /* `タグ名` でタグに適用されるスタイルを指定できる */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+
+        /* `.<クラス名>` でクラスに適用されるスタイルを指定できる */
+        .container {
+            background-color: #fff;
+            padding: 2rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: fit-content;
+            max-width: 90%;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #007BFF;
+        }
+
+        p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: both;
+            overflow: auto;
+            min-height: 4rem;
+            max-height: 20rem;
+            box-sizing: border-box;
+        }
+
+        /* `#<ID名>` で ID に適用されるスタイルを指定できる */
+        /* charCount クラスに適用されるスタイル */
+        #charCount {
+            margin-top: 1rem;
+            font-size: 1rem;
+            color: #888;
+        }
+
+        .note {
+            font-size: 0.875rem;
+            color: #888;
+            margin-top: 1rem;
+        }
+
+        .footer {
+            margin-top: 2rem;
+            font-size: 0.875rem;
+            color: #888;
+        }
+    </style>
     <script>
-        function textConv() {
+        // 文字数をカウントし、その値を表示する関数
+        // この関数は、textarea の入力内容が変更されるたびに呼び出される
+        function countCharacters() {
+            // textarea の入力内容を取得
             let text = document.getElementById("input").value;
-            text = text.toUpperCase(); // textを大文字に変換
-            document.getElementById("output").innerHTML = text;
+
+            // let count = text.length; としてもよいが、定義したところで再利用しないので、冗長である。
+            // それであれば、直接 text.length を利用する方がコードが簡潔になる。
+
+            // 文字数を表示する span 要素のテキストを更新
+            document.getElementById("charCountNum").innerHTML = text.length;
         }
     </script>
 </head>
 <body>
-<!--
-label 要素は、フォーム部品にラベルを付けるための要素である。
-基本的に不要だが、スクリーンリーダーなどの支援技術を使うユーザーにとっては必要で、追加が推奨されるので追加。
--->
-<label for="input"></label><input type="text" size="20" id="input">
-<input type="button" value="Submit" onclick="textConv()">
-<div id="output" style="width:600"></div>
+<div class="container">
+    <h1>文字数カウンター</h1>
+    <p>このページでは、入力された文字列の文字数をカウントします。</p>
+    <label for="input">入力:</label>
+    <!-- oninput 属性により、入力内容が変更されるたびに countCharacters 関数が呼び出される -->
+    <textarea id="input" oninput="countCharacters()"></textarea>
+    <div id="charCount">文字数: <span id="charCountNum">0</span></div>
+    <div class="note">※ text.length を利用しているため、実際の文字数と異なる結果が表示される可能性があります。</div>
+    <div class="footer">
+        茨城大学 工学部 情報工学科
+        <br>
+        2024 年度 前期
+        <br>
+        プログラミング演習III テーマ 2 課題 1
+        <br>
+        伊藤 愛基 (22T4085Y)
+    </div>
+</div>
 </body>
 </html>
