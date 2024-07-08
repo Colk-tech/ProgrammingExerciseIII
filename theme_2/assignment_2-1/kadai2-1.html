@@ -13,9 +13,17 @@ THIS PROGRAM IS THE ORIGINAL. DO NOT HAND IN THIS PROGRAM DESPITE IT IS PUBLIC.
 このプログラムがオリジナルです。このプログラムは公開されていますが、提出用に使用しないでください。
 -->
 
-<html>
+<!--
+授業資料にはなかったが、!DOCTYPE 宣言を追加。通常の Web ページは、この宣言を記述することが推奨されている。
+-->
+<!DOCTYPE html>
+<!--
+こちらも、授業資料にはなかったが、lang 属性を追加。
+この属性は、HTML 文書の言語を指定するもので、日本語の場合は "ja" または "ja-JP" が使われる。
+-->
+<html lang="ja">
 <head>
-    <title>DOMとイベント</title>
+    <title>DOM とイベント</title>
     <script>
         function textConv() {
             let text = document.getElementById("input").value;
@@ -25,7 +33,11 @@ THIS PROGRAM IS THE ORIGINAL. DO NOT HAND IN THIS PROGRAM DESPITE IT IS PUBLIC.
     </script>
 </head>
 <body>
-<input type="text" size="20" id="input">
+<!--
+label 要素は、フォーム部品にラベルを付けるための要素である。
+基本的に不要だが、スクリーンリーダーなどの支援技術を使うユーザーにとっては必要で、追加が推奨されるので追加。
+-->
+<label for="input"></label><input type="text" size="20" id="input">
 <input type="button" value="Submit" onclick="textConv()">
 <div id="output" style="width:600"></div>
 </body>
