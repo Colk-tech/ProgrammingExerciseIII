@@ -12,3 +12,21 @@ THIS PROGRAM IS THE ORIGINAL. DO NOT HAND IN THIS PROGRAM DESPITE IT IS PUBLIC.
 その者が学術倫理方針に違反している可能性があります。
 このプログラムがオリジナルです。このプログラムは公開されていますが、提出用に使用しないでください。
 -->
+
+<html>
+<head>
+    <title>DOMとイベント</title>
+    <script>
+        function textConv() {
+            let text = document.getElementById("input").value;
+            text = text.toUpperCase(); // textを大文字に変換
+            document.getElementById("output").innerHTML = text;
+        }
+    </script>
+</head>
+<body>
+<input type="text" size="20" id="input">
+<input type="button" value="Submit" onclick="textConv()">
+<div id="output" style="width:600"></div>
+</body>
+</html>
